@@ -1,0 +1,51 @@
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjM1MTMxMzN9.cTAnSdtaced3ePLt_HxKzSjosa-mhufyw3_pkTU5NqU
+@host = patient-sun-4737.fly.dev
+
+### Users create (signup)
+POST {{host}}/users
+Content-Type: application/json
+
+{
+  "name": "Test name",
+  "email": "test@test.com",
+  "password": "password",
+  "password_confirmation": "password"
+}
+
+### Sessions create (login)
+POST {{host}}/sessions
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "password"
+}
+
+### Posts index
+GET {{host}}/posts
+
+### Posts create
+POST {{host}}/posts
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "title": "Test title",
+  "body": "Test body"
+}
+
+### Posts show
+GET {{host}}/posts/1.json
+
+### Posts update
+PATCH {{host}}/posts/10
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "image": "test"
+}
+
+### Posts destroy
+DELETE {{host}}/posts/10
+Authorization: Bearer {{jwt}}
